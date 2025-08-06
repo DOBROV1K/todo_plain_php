@@ -1,6 +1,11 @@
 <?php
+
 return [
-    'dsn' => 'mysql:host=localhost;dbname=todo;charset=utf8mb4',
-    'user' => 'root',
-    'password' => ''
+    'driver'   => 'pdo_mysql',
+    'host'     => '127.0.0.1',
+    'port'     => 3306,
+    'dbname'   => 'todo',
+    'user'     => 'root',
+    'password' => '',
+    'charset'  => 'utf8mb4',
 ];

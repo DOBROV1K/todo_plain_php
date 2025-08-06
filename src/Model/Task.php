@@ -3,41 +3,63 @@ namespace Src\Model;
 
 require_once __DIR__ . '/Database.php';
 
+use Doctrine\DBAL\Connection;
+
 class Task
 {
-    private \PDO $pdo;
+    private Connection $conn;
+    private string $table = 'tasks';
 
     public function __construct()
     {
-        $this->pdo = Database::getConnection();
+        $this->conn = Database::getConnection();
     }
 
     public function add(string $title): void
     {
-        $stmt = $this->pdo->prepare('INSERT INTO tasks (title, status) VALUES (:title, "pending")');
-        $stmt->execute(['title' => $title]);
+        $this->conn->insert($this->table, [
+            'title'      => $title,
+            'status'     => 'pending',
+        ]);
     }
 
     public function delete(int $id): void
     {
-        $stmt = $this->pdo->prepare('DELETE FROM tasks WHERE id = :id');
-        $stmt->execute(['id' => $id]);
+        $this->conn->delete($this->table, ['id' => $id]);
     }
 
     public function toggle(int $id): void
     {
-        $stmt = $this->pdo->prepare('UPDATE tasks SET status = IF(status = "pending", "ready", "pending") WHERE id = :id');
-        $stmt->execute(['id' => $id]);
+        $sql = "SELECT status FROM {$this->table} WHERE id = ?";
+        $row = $this->conn->fetchOne($sql, [$id]);
+
+        if ($row === false) {
+            return;
+        }
+
+        $newStatus = ($row === 'pending') ? 'ready' : 'pending';
+        $this->conn->update($this->table, ['status' => $newStatus], ['id' => $id]);
     }
 
+    /**
+     * @param string|null $filter 'done' | 'pending' | null
+     * @return array<int,array<string,mixed>>
+     */
     public function getAll(?string $filter = null): array
     {
-        $sql = 'SELECT * FROM tasks';
+        $sql = "SELECT id, title, status FROM {$this->table}";
+        $params = [];
+
         if ($filter === 'done') {
-            $sql .= ' WHERE status = "ready"';
+            $sql .= " WHERE status = ?";
+            $params[] = 'ready';
         } elseif ($filter === 'pending') {
-            $sql .= ' WHERE status = "pending"';
+            $sql .= " WHERE status = ?";
+            $params[] = 'pending';
         }
-        return $this->pdo->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
+
+        $sql .= " ORDER BY id DESC";
+
+        return $this->conn->fetchAllAssociative($sql, $params);
     }
 }

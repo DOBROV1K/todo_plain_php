@@ -16,7 +16,7 @@ class TaskController
     public function handleRequest(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['description'])) {
-            $this->task->add($_POST['description']);
+            $this->task->add((string) $_POST['description']);
             header('Location: index.php');
             exit;
         }

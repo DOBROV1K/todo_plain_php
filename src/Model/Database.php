@@ -2,11 +2,28 @@
 
 namespace Src\Model;
 
+use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Connection;
+
 class Database
 {
-    public static function getConnection(): \PDO
+    /**
+     * @return Connection
+     */
+    public static function getConnection(): Connection
     {
         $config = require __DIR__ . '/../../config/database.php';
-        return new \PDO($config['dsn'], $config['user'], $config['password']);
+
+        $connectionParams = [
+            'driver'   => $config['driver'],
+            'host'     => $config['host'],
+            'port'     => $config['port'] ?? 3306,
+            'dbname'   => $config['dbname'],
+            'user'     => $config['user'],
+            'password' => $config['password'],
+            'charset'  => $config['charset'] ?? 'utf8mb4',
+        ];
+
+        return DriverManager::getConnection($connectionParams);
     }
 }
