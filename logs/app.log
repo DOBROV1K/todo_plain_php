@@ -1,0 +1,36 @@
+[2025-08-06 11:53:57] REQUEST: GET /todo_plain_php/public/index.php? | BODY: 
+[2025-08-06 11:53:57] DB CONNECT: {"driver":"pdo_mysql","host":"127.0.0.1","port":3306,"dbname":"todo","user":"root","password":"","charset":"utf8mb4"}
+[2025-08-06 11:53:57] ROUTE: Handling GET /todo_plain_php/public/index.php?
+[2025-08-06 11:53:57] ACTION: Fetching tasks with filter='none'
+[2025-08-06 11:53:57] DB OPERATION: SELECT id, title, status FROM tasks ORDER BY id DESC | PARAMS: []
+[2025-08-06 11:54:14] REQUEST: POST /todo_plain_php/public/index.php? | BODY: description=Hoodie
+[2025-08-06 11:54:14] DB CONNECT: {"driver":"pdo_mysql","host":"127.0.0.1","port":3306,"dbname":"todo","user":"root","password":"","charset":"utf8mb4"}
+[2025-08-06 11:54:14] ROUTE: Handling POST /todo_plain_php/public/index.php?
+[2025-08-06 11:54:14] ACTION: Adding task with description='Hoodie'
+[2025-08-06 11:54:14] DB OPERATION: INSERT INTO tasks title='Hoodie'
+[2025-08-06 11:54:14] REQUEST: GET /todo_plain_php/public/index.php | BODY: 
+[2025-08-06 11:54:14] DB CONNECT: {"driver":"pdo_mysql","host":"127.0.0.1","port":3306,"dbname":"todo","user":"root","password":"","charset":"utf8mb4"}
+[2025-08-06 11:54:14] ROUTE: Handling GET /todo_plain_php/public/index.php
+[2025-08-06 11:54:14] ACTION: Fetching tasks with filter='none'
+[2025-08-06 11:54:14] DB OPERATION: SELECT id, title, status FROM tasks ORDER BY id DESC | PARAMS: []
+[2025-08-06 11:54:17] REQUEST: GET /todo_plain_php/public/index.php?action=toggle&id=18 | BODY: 
+[2025-08-06 11:54:17] DB CONNECT: {"driver":"pdo_mysql","host":"127.0.0.1","port":3306,"dbname":"todo","user":"root","password":"","charset":"utf8mb4"}
+[2025-08-06 11:54:17] ROUTE: Handling GET /todo_plain_php/public/index.php?action=toggle&id=18
+[2025-08-06 11:54:17] ACTION: toggle on task ID=18
+[2025-08-06 11:54:17] DB OPERATION: SELECT status FROM tasks WHERE id=18
+[2025-08-06 11:54:17] DB OPERATION: UPDATE tasks SET status='ready' WHERE id=18
+[2025-08-06 11:54:17] REQUEST: GET /todo_plain_php/public/index.php | BODY: 
+[2025-08-06 11:54:17] DB CONNECT: {"driver":"pdo_mysql","host":"127.0.0.1","port":3306,"dbname":"todo","user":"root","password":"","charset":"utf8mb4"}
+[2025-08-06 11:54:17] ROUTE: Handling GET /todo_plain_php/public/index.php
+[2025-08-06 11:54:17] ACTION: Fetching tasks with filter='none'
+[2025-08-06 11:54:17] DB OPERATION: SELECT id, title, status FROM tasks ORDER BY id DESC | PARAMS: []
+[2025-08-06 11:54:18] REQUEST: GET /todo_plain_php/public/index.php?action=delete&id=18 | BODY: 
+[2025-08-06 11:54:18] DB CONNECT: {"driver":"pdo_mysql","host":"127.0.0.1","port":3306,"dbname":"todo","user":"root","password":"","charset":"utf8mb4"}
+[2025-08-06 11:54:18] ROUTE: Handling GET /todo_plain_php/public/index.php?action=delete&id=18
+[2025-08-06 11:54:18] ACTION: delete on task ID=18
+[2025-08-06 11:54:18] DB OPERATION: DELETE FROM tasks WHERE id=18
+[2025-08-06 11:54:18] REQUEST: GET /todo_plain_php/public/index.php | BODY: 
+[2025-08-06 11:54:18] DB CONNECT: {"driver":"pdo_mysql","host":"127.0.0.1","port":3306,"dbname":"todo","user":"root","password":"","charset":"utf8mb4"}
+[2025-08-06 11:54:18] ROUTE: Handling GET /todo_plain_php/public/index.php
+[2025-08-06 11:54:18] ACTION: Fetching tasks with filter='none'
+[2025-08-06 11:54:18] DB OPERATION: SELECT id, title, status FROM tasks ORDER BY id DESC | PARAMS: []
